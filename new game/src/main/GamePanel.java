@@ -11,6 +11,7 @@ public class GamePanel extends JPanel{
 
     private MouseInputs mouseInputs;//created private mouse input obj to unify the object passed for mouse listner and motion listner
     private Game game;
+    private boolean runOnce=true;
 
     public GamePanel(Game game){
 
