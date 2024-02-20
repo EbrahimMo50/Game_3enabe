@@ -5,7 +5,7 @@ import java.awt.event.WindowFocusListener;
 
 class GameWindow{
     public GameWindow (GamePanel gp){
-        JFrame jframe = new JFrame();
+        JFrame jframe = new JFrame("الرجل العناب");
         
         jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jframe.add(gp);
@@ -13,6 +13,7 @@ class GameWindow{
         jframe.pack();
         jframe.setVisible(true);
         jframe.setLocationRelativeTo(null);
+        jframe.setFocusable(true);
         jframe.addWindowFocusListener(new WindowFocusListener() {
 
 			@Override

@@ -3,6 +3,7 @@ package main;
 import java.awt.Graphics;
 import levels.*;
 import entities.Player;
+import static utiliz.Constants.Resolution.*;
 
 public class Game implements Runnable{
 	
@@ -15,14 +16,20 @@ public class Game implements Runnable{
 	private final int UPS_LIMIT=120;
 
 	public Game() {
-		levelManager = new LevelManager(this);
-		player=new Player(200, 200);//location of player spawn
+		initClass();
+
 		gamePanel = new GamePanel(this);
 		gameWindow = new GameWindow(gamePanel);
 		gamePanel.setFocusable(true);//it sets the window to focusing mode to enable taking input
 		gamePanel.requestFocus();
 		startGame();
 		
+	}
+
+	private void initClass(){
+		levelManager = new LevelManager(this);
+		player=new Player(GAME_WIDTH/2, GAME_HEIGHT/2, (int)(SCALE*64), (int)(SCALE*40));//location of player spawn
+		player.loadLvlData(levelManager.getLevel().getLvldata());
 	}
 
 	public void startGame(){
@@ -35,6 +42,7 @@ public class Game implements Runnable{
 	}
 
 	public void render(Graphics g){
+		//player.drawBackground(g);
 		levelManager.draw(g);
 		player.render(g);
 	}
