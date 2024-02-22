@@ -19,16 +19,9 @@ public class Entities {
     protected void initHitBox(float x, float y, float width, float height) {
         hitBox = new Rectangle2D.Float(x,y,width,height);
     }
-
-    protected void updateHitBox(float x,float y){
-        hitBox.x=(int)x;
-        hitBox.y=(int)y;
-    }
-
-    /* 
+    
     public void drawHitBox(Graphics g){
         g.setColor(Color.RED);
         g.drawRect((int)hitBox.x, (int)hitBox.y, (int)hitBox.width, (int)hitBox.height);
     }
-    */
 }
