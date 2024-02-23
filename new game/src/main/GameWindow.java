@@ -4,11 +4,11 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;
 
 class GameWindow{
-    public GameWindow (GamePanel gp){
+    public GameWindow (GamePanel gamepanel){
         JFrame jframe = new JFrame("الرجل العناب");
         
         jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        jframe.add(gp);
+        jframe.add(gamepanel);
         jframe.setResizable(false);
         jframe.pack();
         jframe.setVisible(true);
@@ -18,7 +18,7 @@ class GameWindow{
 
 			@Override
 			public void windowLostFocus(WindowEvent e) {
-				gp.getGame().resetWhenFocusLost();
+				gamepanel.getGame().resetWhenFocusLost();
 			}
 
 			@Override

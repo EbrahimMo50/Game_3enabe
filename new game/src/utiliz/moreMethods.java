@@ -4,8 +4,6 @@ import static utiliz.Constants.Resolution.*;
 
 import java.awt.geom.Rectangle2D;
 
-import main.Game;
-
 public class moreMethods {
     public static boolean canMove(float x,float y,int width,int height,int[][] lvlData){
         if(isSolid(x,y,lvlData))return false;
