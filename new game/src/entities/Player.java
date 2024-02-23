@@ -14,14 +14,14 @@ public class Player extends Entities{
     private BufferedImage animation[][];
     private int current_move = IDLE;
 
-    private boolean left,right,moving;                          //movment bools
+    private boolean left,right,moving,attack;                          //movment bools
     private int[][] lvlData;                                    //temp loading the lvlData here
     private final float xOffSet = 21*SCALE, yOffSet = 15*SCALE; //resolution releated
     
     //jumping / gravity releated
     private boolean airBorned = false, doubleJump = true;
     private float airSpeed = 0;
-    private float gravity = 0.05f*SCALE , fallSpeed = 0.5f*SCALE, jumpingSpeed = -2.5f*SCALE;
+    private float gravity = 0.05f*SCALE , fallSpeed = 0.8f*SCALE, jumpingSpeed = -2.5f*SCALE;
 
 
     public Player(float x, float y, int width, int height){
@@ -42,7 +42,7 @@ public class Player extends Entities{
     public void render(Graphics g){
         g.drawImage(animation[indexAnimation][current_move], (int) (hitBox.x - xOffSet), (int) (hitBox.y - yOffSet), (int)(64*SCALE), (int)(40*SCALE), null);
         
-        //drawHitBox(g);  //this is for dubugging every entity hitbox
+        //drawHitBox(g);  //this is for dubugging every entity hitbox inherited from Entity class
     }
     //render loop that gets updated every FPS in game loop with rate = 120 FPS
 
@@ -77,16 +77,15 @@ public class Player extends Entities{
 
     private void updatePosition(){
         moving=false;
-        // if(jump)
-        //     jump();
-        if (!left && !right && !airBorned)
-        return;
 
         if(!isEntityOnFloor(hitBox, lvlData))
             airBorned=true;
         
         else 
             doubleJump=true;
+
+        if (!left && !right && !airBorned)
+        return;
 
         int xSpeed=0;
 
@@ -119,7 +118,14 @@ public class Player extends Entities{
         moving=true;
     }
 
+/*
+ * removed the boolean movment "x,y" and used the hitbox's "x,y" to draw the player
+ */
+
     public void jump() {
+        if(isEntityOnFloor(hitBox, lvlData))
+            doubleJump=true;
+
         if(!airBorned){
             airSpeed=jumpingSpeed;
             airBorned=true;
@@ -136,6 +142,7 @@ public class Player extends Entities{
         }
         else{
             hitBox.x=moveXNextToWall(hitBox,xSpeed);
+            doubleJump=true;
         }
     }
 
@@ -152,6 +159,9 @@ public class Player extends Entities{
                 current_move=FALLING;
             }
             else current_move=JUMPING;
+        }
+        if(attack){
+            current_move=ATTACKING;
         }
         if(current_move!=move){
             indexAnimation=0;
@@ -178,5 +188,8 @@ public class Player extends Entities{
     }
     public void setLeft(boolean value){
         this.left=value;
+    }
+    public void setAttack(boolean value){
+        this.attack=value;
     }
 }

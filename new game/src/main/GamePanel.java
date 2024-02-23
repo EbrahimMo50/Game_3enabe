@@ -1,5 +1,6 @@
 package main;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import javax.swing.JPanel;
@@ -29,7 +30,8 @@ public class GamePanel extends JPanel{
         addMouseMotionListener(mouseInputs);
 
         //3 methods to take input from user inherited from JPanel
-        
+        Color lightBlue=new Color(135, 206,235);
+        this.setBackground(lightBlue);
         
     }
 
